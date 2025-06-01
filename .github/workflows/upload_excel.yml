@@ -1,0 +1,18 @@
+name: Upload Diário de Excel
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Executa todos os dias à meia-noite UTC
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Adicionar arquivo Excel atualizado
+        run: |
+          echo "Atualização diária - $(date)" >> arquivo.xlsx
+          git add arquivo.xlsx
+          git commit -m "Atualização diária do Excel"
+          git push
